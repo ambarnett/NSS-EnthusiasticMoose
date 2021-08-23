@@ -1,77 +1,56 @@
 ﻿using System;
 
+Main();
+
 void Main()
 {
     Console.WriteLine("Welcome to the Enthusiastic Moose Simulator!");
     Console.WriteLine("--------------------------------------------");
     Console.WriteLine();
 
-    // Let the moose speak!
-    MooseSays("H I, I'M  E N T H U S I A S T I C !");
-    MooseSays("I really am enthusiastic");
+    string[] mooseAnswers = {
+        "As I see it, yes.",
+        "Ask again later.",
+        "Better not tell you now.",
+        "Cannot predict now.",
+        "Concentrate and ask again.",
+        "Don’t count on it.",
+        "It is certain.",
+        "It is decidedly so.",
+        "Most likely.",
+        "My reply is no.",
+        "My sources say no.",
+        "Outlook not so good.",
+        "Outlook good.",
+        "Reply hazy, try again.",
+        "Signs point to yes.",
+        "Very doubtful.",
+        "Without a doubt.",
+        "Yes.",
+        "Yes – definitely.",
+        "You may rely on it."
+    };
 
-    // Ask a question
-    CanadaQuestion();
-    EnthusiasticQuestion();
-    LoveCSharpQuestion();
-    SecretQuestion();
-}
-Main();
-void CanadaQuestion()
-{
-    bool isTrue = MooseAsks("Is Canada real?");
-    if(isTrue)
-    {
-        MooseSays("Really? It seems very unlikely.");
-    }
-    else
-    {
-        MooseSays("I  K N E W  I T  !!!");
-    }
-}
 
-void EnthusiasticQuestion()
-{
-    bool isEnthusiastic = MooseAsks("Are you enthusiastic?");
-    if (isEnthusiastic)
+    string UserQuestion()
     {
-        MooseSays("Yay!");
+        Console.WriteLine("Ask me a question: ");
+        string userInput = Console.ReadLine();
+        return userInput;
     }
-    else
-    {
-        MooseSays("You should try it!");
-    }
-}
 
-void LoveCSharpQuestion()
-{
-    bool doesLoveCSharp = MooseAsks("Do you love C# yet?");
-    if(doesLoveCSharp)
+    string Answer()
     {
-        MooseSays("Good job sucking up to your instructor!");
+        Random r = new Random();
+        int genRand = r.Next(0, mooseAnswers.Length);
+        string Answer = mooseAnswers[genRand];
+        return Answer;
     }
-    else 
-    {
-        MooseSays("You will...oh, yes, you will...");
-    }
+
+    MooseSays(UserQuestion(), Answer());
 }
 
-void SecretQuestion()
-{
-    bool wantsSecret = MooseAsks("Do you want to know a secret?");
-    if (wantsSecret)
-    {
-        MooseSays("ME TOO!!!!! I love secrets...tell me one!");
-    }
-    else
-    {
-        MooseSays("Oh, no... secrets are the best, I love to share them!");
-    }
-}
-
-void MooseSays(string message)
-{
-    Console.WriteLine($@"
+void MooseSays(string q, string m) => Console.WriteLine($@"
                                       _.--^^^--,
                                     .'          `\
   .-^^^^^^-.                      .'              |
@@ -87,8 +66,8 @@ void MooseSays(string message)
           \_/ |  |   './ _     _  \.'
                '-'    | /       \ |
                       |  .-. .-.  |
-                      \ / o| |o \ /
-                       |   / \   |    {message}
+                      \ / o| |o \ /   {q}  
+                       |   / \   |    {m}
                       / `^`   `^` \
                      /             \
                     | '._.'         \
@@ -100,25 +79,3 @@ void MooseSays(string message)
                        `^^` `^^^`
     
     ");
-}
-
-bool MooseAsks(string question)
-{
-    Console.Write($"{question} (Y/N): ");
-    string answer = Console.ReadLine().ToLower();
-
-    while (answer != "y" && answer != "n")
-    {
-        Console.Write($"{question} (Y/N): ");
-        answer = Console.ReadLine().ToLower();
-    }
-
-    if (answer == "y")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
